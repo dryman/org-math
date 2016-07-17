@@ -1,0 +1,46 @@
+#+TITLE: Probability
+#+AUTHOR: Felix Chern
+#+DESCRIPTION: Introduction to some elementary probability concepts
+
+#+TOC: headlines 2
+
+* Probability model core concepts
+
+A probability model can split into three compoents:
+- Sample space: a set whose elements are called sample points or outcomes
+- Events: class of all subsets of the sample space
+- Probability measure: can be treat as a relative "volume" of events in the sample space.
+
+** Sample space
+
+A sample space is a set of all the possible /outcomes/ or /sample points/, denoted as \Omega. An outcome \omega is often called a finest grain result when even {\omega} contains no proper subsets. The outcomes in the sample space are /mutually exclusive/ and /collectively constitute/ the entire sample space.
+
+** Events
+
+Given a sample space \Omega, the class of subsets of \Omega that constitute the set of events satisfies the followings:
+
+1. \Omega is an event.
+2. For every sequence of events A_1, A_2, ..., the union \cup_{n=1}^\infty A_n is an event
+3. For every event A, the complement A^c is an event
+
+From 1. and 3., we can see \empty is also an event since \Omega^c = \empty.
+
+** Probability
+
+Given any sample space \Omega and any class of events \Epsilon, a probability rule is a function Pr{\cdot} mapping each A \in \Epsilon to a real number in such the following holds:
+
+1. Pr{\Omega} = 1
+2. For every event A, Pr{A} \ge 0
+3. The probability of the union of any sequence A_1, A_2,... of disjoint events is given by
+Pr{\cup_{n=1}^\infty A_n} = \sum_{n=1}^\infty Pr{A_n}
+
+These can imply the followings:
+
+- Pr{\empty} = 0
+- Pr{\cup_{n=1}^m A_n} = \sum_{n=1}^m Pr{A_n} for A_1,...,A_m disjoint
+- Pr{A^c} = 1 - Pr{A} for all A
+- Pr{A} \le Pr{B} for all A \sube B
+- Pr{A} \le 1 for all A
+- \sum_n Pr{A_n} \le 1 for A_1,..,A_n disjoint
+
+* Conditional probabilities
