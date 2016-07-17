@@ -21,7 +21,6 @@ The setup is mainly for using gnuplot in orgmode. Below is a minimal demo to emb
 plot sin(x)
 #+END_SRC
 
-#+RESULTS:
 [[./img/demo.png]]
 
 The default terminal output size is 640,480 and is too large for me. If you are fine with that you can omit the ~:term~ setting.
