@@ -19,15 +19,7 @@ The setup is mainly for using gnuplot in orgmode. Below is a minimal demo.
 
 ** Example plot
 
-To plot a math function in org, you can use gnuplot in org-babel section. Here is the snippet for drawing a sin(x) function and embed the plot in emacs.
-
-#+BEGIN_EXAMPLE
-#+BEGIN_SRC gnuplot :file img/demo.png :term png small size 480,320 :exports both
-plot sin(x)
-#+END_SRC
-#+END_EXAMPLE
-
-If you were running emacs org-mode and have the snippet above pasted in, type ~C-c C-c~ to trigger the gnuplot org-babel. Then you should see the results as below.
+To plot a math function in org, you can use gnuplot in org-babel section. Here is the snippet for drawing a sin(x) function and embed the plot in emacs. You have to view the snippet in raw format from github, or in emacs. You can also change the gnuplot snippet in emacs and type ~C-c C-c~ to update the plot.
 
 #+BEGIN_SRC gnuplot :file img/demo.png :term png small size 480,320 :exports both
 plot sin(x)
@@ -35,6 +27,12 @@ plot sin(x)
 
 #+RESULTS:
 [[file:img/demo.png]]
+
+In the raw snippet, I set the options
+
+#+BEGIN_SRC
+:file img/demo.png :term png small size 480,320 :exports both
+#+END_SRC
 
 The default terminal output size is 640,480 and is too large for me. If you are fine with that you can omit the ~:term~ setting.
 
