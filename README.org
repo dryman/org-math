@@ -17,21 +17,25 @@ https://github.com/dryman/felix-emacs-config or use the following snippet in you
 
 The setup is mainly for using gnuplot in orgmode. Below is a minimal demo to embed gnuplot output in orgmode:
 
-#+BEGIN_SRC gnuplot :file img/demo.png :term png small size 480,320
+** Example plot
+
+#+BEGIN_SRC gnuplot :file img/demo.png :term png small size 480,320 :exports both
 plot sin(x)
 #+END_SRC
 
-[[./img/demo.png]]
+#+RESULTS:
+[[file:img/demo.png]]
 
 The default terminal output size is 640,480 and is too large for me. If you are fine with that you can omit the ~:term~ setting.
 
 ** LICENSE
 Copyright (c) 2016 Felix Chern
-#+BEGIN_ASCII
+
+#+BEGIN_QUOTE
       Permission is granted to copy, distribute and/or modify this
       document under the terms of the GNU Free Documentation License,
       Version 1.3 or any later version published by the Free Software
       Foundation; with no Invariant Sections, no Front-Cover Texts, and
       no Back-Cover Texts.  A copy of the license is included in the
       section entitled "GNU Free Documentation License".
-#+END_ASCII
+#+END_QUOTE
