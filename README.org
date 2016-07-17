@@ -38,6 +38,21 @@ The default terminal output size is 640,480 and is too large for me. If you are 
 
 You can change the ~:export~ setting to get just the plot by ~result~, only code ~code~, both ~both~ (which I used in this example), or nothing ~none~. This changes the behavior of how it shows up on github page. The default is ~code~ only.
 
+** Math example
+*** Greek characters
+#+BEGIN_SRC
+\alpha \beta
+#+END_SRC
+\alpha \beta
+
+*** Formulas
+#+BEGIN_SRC
+\sum_{n=0}^\infty 1/n
+#+END_SRC
+\sum_{n=0}^\infty 1/n
+
+Nope, it cannot render both the subscript and superscript. Complicated latex expressions can be written in org-mode and output as latex document, but it doesn't work well in html output.
+
 ** LICENSE
 Copyright (c) 2016 Felix Chern
 
