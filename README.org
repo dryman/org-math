@@ -22,7 +22,7 @@ plot sin(x)
 #+END_SRC
 
 #+RESULTS:
-[[file:img/demo.png]]
+[[./img/demo.png]]
 
 The default terminal output size is 640,480 and is too large for me. If you are fine with that you can omit the ~:term~ setting.
 
