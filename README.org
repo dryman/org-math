@@ -10,8 +10,10 @@ https://github.com/dryman/felix-emacs-config or use the following snippet in you
 #+BEGIN_SRC elisp
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((gnuplot . t)))
+ '((gnuplot . t))
+   (python . t))
 (setq org-startup-with-inline-images t)
+(setq org-pretty-entities t)
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 #+END_SRC
 
