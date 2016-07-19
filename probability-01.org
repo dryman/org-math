@@ -120,35 +120,16 @@ F_X(x) = \int_{-\infty}^x f_X(y)dy
 
 ** Binomial distribution
 
-#+name: binomial
-#+header: :var n=40
-#+BEGIN_SRC python :results value :export none
-def binom(p,o):
-  o[1] = n*p*(1-p)**(n-1)
-  for k in range(2,n+1):
-    o[k] = o[k-1] * (n+1-k) / k * p / (1-p)
-p1, p3, p5, p7, p9 = 0.1, 0.3, 0.5, 0.7, 0.9
-o1 = [0.0]*(n+1)
-o3 = [0.0]*(n+1)
-o5 = [0.0]*(n+1)
-o7 = [0.0]*(n+1)
-o9 = [0.0]*(n+1)
-binom(p1,o1)
-binom(p3,o3)
-binom(p5,o5)
-binom(p7,o7)
-binom(p9,o9)
-
-return zip(o1,o3,o5,o7,o9)
-#+END_SRC
-
-
-#+BEGIN_SRC gnuplot :var data=binomial :file img/prob-001.png :exports both :term png small size 480,320
-p data u 1 w histeps tit "p=0.1", \
-  data u 2 w histeps tit "p=0.3", \
-  data u 3 w histeps tit "p=0.5", \
-  data u 4 w histeps tit "p=0.7", \
-  data u 5 w histeps tit "p=0.9"
+#+BEGIN_SRC gnuplot :file img/prob-001.png :exports both :term png small size 480,320
+rnd(x) = floor(x+0.5)
+binom(x,n,p)=exp(lgamma(n+1)-lgamma(n-x+1)-lgamma(x+1)+x*log(p)+(n-x)*log(1.0-p))
+n=40
+p [0:n] \
+  p=0.1, binom(rnd(x),n,p) w histeps tit "p=0.1", \
+  p=0.3, binom(rnd(x),n,p) w histeps tit "p=0.3", \
+  p=0.5, binom(rnd(x),n,p) w histeps tit "p=0.5", \
+  p=0.7, binom(rnd(x),n,p) w histeps tit "p=0.7", \
+  p=0.9, binom(rnd(x),n,p) w histeps tit "p=0.9"
 #+END_SRC
 
 #+RESULTS:
@@ -161,29 +142,17 @@ p data u 1 w histeps tit "p=0.1", \
 D_{KL}(P||Q) = \sum_{i}P(i)log \frac{P(i)}{Q(i)}
 \]
 
-#+NAME: kl-divergence
-#+HEADER: :var n=20
-#+BEGIN_SRC python
-from math import log
-def DKL(p,n,k):
-  p_t = float(k)/float(n)
-  return p_t*log(p_t/p) + (1-p_t)*log((1-p_t)/(1-p))
-xrange = range(1,n)
-return zip(xrange, 
-  map(lambda k: DKL(0.1,n,k), xrange),
-  map(lambda k: DKL(0.3,n,k), xrange),
-  map(lambda k: DKL(0.5,n,k), xrange),
-  map(lambda k: DKL(0.7,n,k), xrange),
-  map(lambda k: DKL(0.9,n,k), xrange)
-)
-#+END_SRC
-
 #+BEGIN_SRC gnuplot :var data=kl-divergence :file img/prob-002.png :exports both :term png small size 480,320
-p data u 1:2 w histeps tit "p=0.1", \
-  data u 1:3 w histeps tit "p=0.3", \
-  data u 1:4 w histeps tit "p=0.5", \
-  data u 1:5 w histeps tit "p=0.7", \
-  data u 1:6 w histeps tit "p=0.9"
+# rnd = floor(x+0.5) somehow doesn't work here..
+DKL(p,n,k) = (k/n)*log((k/n)/p) + (1-k/n)*log((1-k/n)/(1-p))
+n=20
+set samples n+1
+p [0:n] \
+  DKL(0.1,n,x) w histeps tit "p=0.1", \
+  DKL(0.3,n,x) w histeps tit "p=0.3", \
+  DKL(0.5,n,x) w histeps tit "p=0.5", \
+  DKL(0.7,n,x) w histeps tit "p=0.7", \
+  DKL(0.9,n,x) w histeps tit "p=0.9"
 #+END_SRC
 
 #+RESULTS:
