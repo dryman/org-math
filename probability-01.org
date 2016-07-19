@@ -120,7 +120,8 @@ F_X(x) = \int_{-\infty}^x f_X(y)dy
 
 ** Binomial distribution
 
-#+BEGIN_SRC gnuplot
+#+BEGIN_SRC gnuplot :file img/prob-001.png :exports both :term png small size 480,320
+reset
 rnd(x) = floor(x+0.5)
 binom(x,n,p)=exp(lgamma(n+1)-lgamma(n-x+1)-lgamma(x+1)+x*log(p)+(n-x)*log(1.0-p))
 n=40
@@ -144,6 +145,7 @@ D_{KL}(P||Q) = \sum_{i}P(i)log \frac{P(i)}{Q(i)}
 
 #+BEGIN_SRC gnuplot :file img/prob-002.png :exports both :term png small size 480,320
 # rnd = floor(x+0.5) somehow doesn't work here..
+reset
 DKL(p,n,k) = (k/n)*log((k/n)/p) + (1-k/n)*log((1-k/n)/(1-p))
 n=20
 set samples n+1
@@ -195,6 +197,7 @@ and
 *** Binary MGF
 
 #+BEGIN_SRC gnuplot :file img/prob-003.png :exports both :term png small size 480,320
+reset
 set title "Binary MGF 1-p+pe^r"
 p [-0.1:0.1] f(x)=(1-p+p*exp(x)), \
   p=0.1, f(x) tit "p=0.1", \
@@ -210,6 +213,7 @@ p [-0.1:0.1] f(x)=(1-p+p*exp(x)), \
 *** Binomial MGF
 
 #+BEGIN_SRC gnuplot :file img/prob-004.png :exports both :term png small size 480,320
+reset
 set title "Binomial MGF (1-p+pe^r)^n, n=20"
 p [-0.1:0.1] f(x)=(1-p+p*exp(x))**20, \
   p=0.1, f(x) tit "p=0.1", \
@@ -229,6 +233,7 @@ Pr\{S_n \ge na\} \le \left[g_X(r)\right]^n e^{-rna}
 \]
 
 #+BEGIN_SRC gnuplot :file img/prob-005.png :exports both :term png small size 480,320
+reset
 set title "Binomial MGF (1-p+pe^r)^n * exp(-x*na), n=20"
 p [-0.3:1.1] f(x)=((1-p+p*exp(x))**20)*exp(-x*a), \
   p=0.5, a=10, f(x) tit "p=0.5, na=10", \

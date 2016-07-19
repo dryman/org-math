@@ -26,7 +26,7 @@ The setup is mainly for using gnuplot in orgmode. Below is a minimal demo.
 To plot a math function in org, you can use gnuplot in org-babel section. Here is the snippet for drawing a sin(x) function and embed the plot in emacs. You have to view the snippet in raw format from github, or in emacs. You can also change the gnuplot snippet in emacs and type ~C-c C-c~ to update the plot.
 
 #+BEGIN_SRC gnuplot :file img/demo.png :term png small size 480,320 :exports both
-set title "sin(x)"
+reset
 plot sin(x)
 #+END_SRC
 
