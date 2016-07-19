@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Probability</title>
-<!-- 2016-07-18 Mon 21:37 -->
+<!-- 2016-07-18 Mon 21:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Felix Chern" />
@@ -474,25 +474,6 @@ F_X(x) = \int_{-\infty}^x f_X(y)dy
 </div><div id="outline-container-sec-3-1" class="outline-3">
 <h3 id="sec-3-1"><span class="section-number-3">3.1</span> Binomial distribution</h3>
 <div class="outline-text-3" id="text-3-1">
-<div class="org-src-container">
-
-<pre class="src src-gnuplot"><span style="color: #a0522d;">rnd(x) =</span> <span style="color: #0000ff;">floor</span>(x+0.5)
-<span style="color: #a0522d;">binom(x,n,p)=</span><span style="color: #0000ff;">exp</span>(<span style="color: #0000ff;">lgamma</span>(n+1)-<span style="color: #0000ff;">lgamma</span>(n-x+1)-<span style="color: #0000ff;">lgamma</span>(x+1)+x*<span style="color: #0000ff;">log</span>(p)+(n-x)*<span style="color: #0000ff;">log</span>(1.0-p))
-<span style="color: #a0522d;">n=</span>40
-p [<span style="color: #008b8b;">0:n</span>] \
-  <span style="color: #a0522d;">p=</span>0.1, binom(rnd(x),n,p) w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.1"</span>, \
-  <span style="color: #a0522d;">p=</span>0.3, binom(rnd(x),n,p) w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.3"</span>, \
-  <span style="color: #a0522d;">p=</span>0.5, binom(rnd(x),n,p) w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.5"</span>, \
-  <span style="color: #a0522d;">p=</span>0.7, binom(rnd(x),n,p) w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.7"</span>, \
-  <span style="color: #a0522d;">p=</span>0.9, binom(rnd(x),n,p) w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.9"</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="img/prob-001.png" alt="prob-001.png" />
-</p>
-</div>
 </div>
 </div>
 
@@ -666,7 +647,7 @@ The smallest value of na=10 is close to 1, while smallest value of na=15 is clos
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Felix Chern</p>
-<p class="date">Created: 2016-07-18 Mon 21:37</p>
+<p class="date">Created: 2016-07-18 Mon 21:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.95.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
