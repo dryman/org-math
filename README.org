@@ -1,12 +1,10 @@
 #+TITLE: About
 
-* Math Learning Notes in Orgmode
-
 A simple repository to place my math study notes.
 
 Exported page: http://www.idryman.org/org-math/
 
-** Emacs Setup
+* Emacs Setup
 
 You can either use my github config
 https://github.com/dryman/felix-emacs-config or use the following snippet in your .emacs
@@ -23,11 +21,12 @@ https://github.com/dryman/felix-emacs-config or use the following snippet in you
 
 The setup is mainly for using gnuplot in orgmode. Below is a minimal demo.
 
-** Example plot
+* Example plot
 
 To plot a math function in org, you can use gnuplot in org-babel section. Here is the snippet for drawing a sin(x) function and embed the plot in emacs. You have to view the snippet in raw format from github, or in emacs. You can also change the gnuplot snippet in emacs and type ~C-c C-c~ to update the plot.
 
 #+BEGIN_SRC gnuplot :file img/demo.png :term png small size 480,320 :exports both
+set title "sin(x)"
 plot sin(x)
 #+END_SRC
 
@@ -44,7 +43,7 @@ The default terminal output size is 640,480 and is too large for me. If you are 
 
 You can change the ~:export~ setting to get just the plot by ~result~, only code ~code~, both ~both~ (which I used in this example), or nothing ~none~. This changes the behavior of how it shows up on github page. The default is ~code~ only.
 
-** Math example
+* Math example
 *** Greek characters
 #+BEGIN_SRC
 \alpha \beta
@@ -59,7 +58,7 @@ You can change the ~:export~ setting to get just the plot by ~result~, only code
 
 Nope, it cannot render both the subscript and superscript. Complicated latex expressions can be written in org-mode and output as latex document, but it doesn't work well in html output.
 
-** LICENSE
+* LICENSE
 Copyright (c) 2016 Felix Chern
 
 #+BEGIN_QUOTE

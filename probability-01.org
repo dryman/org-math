@@ -142,7 +142,7 @@ p [0:n] \
 D_{KL}(P||Q) = \sum_{i}P(i)log \frac{P(i)}{Q(i)}
 \]
 
-#+BEGIN_SRC gnuplot :var data=kl-divergence :file img/prob-002.png :exports both :term png small size 480,320
+#+BEGIN_SRC gnuplot :file img/prob-002.png :exports both :term png small size 480,320
 # rnd = floor(x+0.5) somehow doesn't work here..
 DKL(p,n,k) = (k/n)*log((k/n)/p) + (1-k/n)*log((1-k/n)/(1-p))
 n=20
