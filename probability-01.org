@@ -115,26 +115,24 @@ A rv is said to be continuous if there is a funciton f_X(x) such that, for each 
 F_X(x) = \int_{-\infty}^x f_X(y)dy
 \]
 
-
 * Common distributions
 
 ** Binomial distribution
 
-#+BEGIN_SRC gnuplot :file img/prob-001.png :exports both :term png small size 480,320
+#+BEGIN_SRC gnuplot :file img/prob-001.gif :exports both :term gif small animate delay 20 size 480,320
 reset
 rnd(x) = floor(x+0.5)
 binom(x,n,p)=exp(lgamma(n+1)-lgamma(n-x+1)-lgamma(x+1)+x*log(p)+(n-x)*log(1.0-p))
-n=40
-p [0:n] \
-  p=0.1, binom(rnd(x),n,p) w histeps tit "p=0.1", \
-  p=0.3, binom(rnd(x),n,p) w histeps tit "p=0.3", \
-  p=0.5, binom(rnd(x),n,p) w histeps tit "p=0.5", \
-  p=0.7, binom(rnd(x),n,p) w histeps tit "p=0.7", \
-  p=0.9, binom(rnd(x),n,p) w histeps tit "p=0.9"
+n=20
+set xrange [0:n]
+set yrange [0:0.5]
+do for [pp=2:98:2] {
+  plot binom(rnd(x),n,pp/100.0) w histeps tit sprintf("p=%.2f",pp/100.0)
+}
 #+END_SRC
 
 #+RESULTS:
-[[file:img/prob-001.png]]
+[[file:img/prob-001.gif]]
 
 
 ** Kullback-Liebler divergence
