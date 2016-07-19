@@ -4,6 +4,8 @@
 
 A simple repository to place my math study notes.
 
+Exported page: http://www.idryman.org/org-math/
+
 ** Emacs Setup
 
 You can either use my github config
