@@ -120,7 +120,7 @@ F_X(x) = \int_{-\infty}^x f_X(y)dy
 
 ** Binomial distribution
 
-#+BEGIN_SRC gnuplot :file img/prob-001.png :exports both :term png small size 480,320
+#+BEGIN_SRC gnuplot
 rnd(x) = floor(x+0.5)
 binom(x,n,p)=exp(lgamma(n+1)-lgamma(n-x+1)-lgamma(x+1)+x*log(p)+(n-x)*log(1.0-p))
 n=40
