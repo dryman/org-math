@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>About</title>
+<!-- 2016-07-18 Mon 18:44 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Felix Chern" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">About</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Math Learning Notes in Orgmode</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Emacs Setup</a></li>
+<li><a href="#sec-1-2">1.2. Example plot</a></li>
+<li><a href="#sec-1-3">1.3. Math example</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. Greek characters</a></li>
+<li><a href="#sec-1-3-2">1.3.2. Formulas</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. LICENSE</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Math Learning Notes in Orgmode</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A simple repository to place my math study notes.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Emacs Setup</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+You can either use my github config
+<a href="https://github.com/dryman/felix-emacs-config">https://github.com/dryman/felix-emacs-config</a> or use the following snippet in your .emacs
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((gnuplot . t))
+   (python . t))
+(<span style="color: #a020f0;">setq</span> org-startup-with-inline-images t)
+(<span style="color: #a020f0;">setq</span> org-pretty-entities t)
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+</pre>
+</div>
+
+<p>
+The setup is mainly for using gnuplot in orgmode. Below is a minimal demo.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Example plot</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+To plot a math function in org, you can use gnuplot in org-babel section. Here is the snippet for drawing a sin(x) function and embed the plot in emacs. You have to view the snippet in raw format from github, or in emacs. You can also change the gnuplot snippet in emacs and type <code>C-c C-c</code> to update the plot.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-gnuplot"><span style="color: #a020f0;">plot</span> <span style="color: #0000ff;">sin</span>(x)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/demo.png" alt="demo.png" />
+</p>
+</div>
+
+<p>
+In the raw snippet, I set the options
+</p>
+
+<pre class="example">
+:file img/demo.png :term png small size 480,320 :exports both
+</pre>
+
+<p>
+The default terminal output size is 640,480 and is too large for me. If you are fine with that you can omit the <code>:term</code> setting.
+</p>
+
+<p>
+You can change the <code>:export</code> setting to get just the plot by <code>result</code>, only code <code>code</code>, both <code>both</code> (which I used in this example), or nothing <code>none</code>. This changes the behavior of how it shows up on github page. The default is <code>code</code> only.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Math example</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Greek characters</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<pre class="example">
+\alpha \beta
+</pre>
+<p>
+&alpha; &beta;
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Formulas</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<pre class="example">
+\sum_{n=0}^\infty 1/n
+</pre>
+<p>
+&sum;<sub>n=0</sub><sup>&infin;</sup> 1/n
+</p>
+
+<p>
+Nope, it cannot render both the subscript and superscript. Complicated latex expressions can be written in org-mode and output as latex document, but it doesn't work well in html output.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> LICENSE</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Copyright (c) 2016 Felix Chern
+</p>
+
+<blockquote>
+<p>
+Permission is granted to copy, distribute and/or modify this
+document under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free Software
+Foundation; with no Invariant Sections, no Front-Cover Texts, and
+no Back-Cover Texts.  A copy of the license is included in the
+section entitled "GNU Free Documentation License".
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Felix Chern</p>
+<p class="date">Created: 2016-07-18 Mon 18:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.95.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

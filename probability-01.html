@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Probability</title>
+<!-- 2016-07-18 Mon 18:44 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Felix Chern" />
+<meta  name="description" content="Introduction to some elementary probability concepts"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Probability</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Probability model core concepts</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Sample space</a></li>
+<li><a href="#sec-1-2">1.2. Events</a></li>
+<li><a href="#sec-1-3">1.3. Probability</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Probability theories</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Conditional probabilities</a></li>
+<li><a href="#sec-2-2">2.2. Statistical independent</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. conditionally independent</a></li>
+<li><a href="#sec-2-2-2">2.2.2. Multiple event indepedence</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3. Random variables</a></li>
+<li><a href="#sec-2-4">2.4. Cumulative distribution function (CDF)</a>
+<ul>
+<li><a href="#sec-2-4-1">2.4.1. Probability mass function (PMF)</a></li>
+<li><a href="#sec-2-4-2">2.4.2. Probability density function (PDF)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Common distributions</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Binomial distribution</a></li>
+<li><a href="#sec-3-2">3.2. Kullback-Liebler divergence</a></li>
+<li><a href="#sec-3-3">3.3. Moment generating function</a>
+<ul>
+<li><a href="#sec-3-3-1">3.3.1. Binary MGF</a></li>
+<li><a href="#sec-3-3-2">3.3.2. Binomial MGF</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-4">3.4. Chernoff bound</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Probability model core concepts</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Sample space</a></li>
+<li><a href="#sec-1-2">1.2. Events</a></li>
+<li><a href="#sec-1-3">1.3. Probability</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Probability theories</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Conditional probabilities</a></li>
+<li><a href="#sec-2-2">2.2. Statistical independent</a></li>
+<li><a href="#sec-2-3">2.3. Random variables</a></li>
+<li><a href="#sec-2-4">2.4. Cumulative distribution function (CDF)</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Common distributions</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Binomial distribution</a></li>
+<li><a href="#sec-3-2">3.2. Kullback-Liebler divergence</a></li>
+<li><a href="#sec-3-3">3.3. Moment generating function</a></li>
+<li><a href="#sec-3-4">3.4. Chernoff bound</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Probability model core concepts</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A probability model can split into three compoents:
+</p>
+<ul class="org-ul">
+<li>Sample space: a set whose elements are called sample points or outcomes
+</li>
+<li>Events: class of all subsets of the sample space
+</li>
+<li>Probability measure: can be treat as a relative "volume" of events in the sample space.
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Sample space</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+A sample space is a set of all the possible <i>outcomes</i> or <i>sample points</i>, denoted as &Omega;. An outcome &omega; is often called a finest grain result when even {&omega;} contains no proper subsets. The outcomes in the sample space are <i>mutually exclusive</i> and <i>collectively constitute</i> the entire sample space.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Events</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Given a sample space &Omega;, the class of subsets of &Omega; that constitute the set of events satisfies the followings:
+</p>
+
+<ol class="org-ol">
+<li>&Omega; is an event.
+</li>
+<li>For every sequence of events A<sub>1</sub>, A<sub>2</sub>, &#x2026;, the union &cup;<sub>n=1</sub><sup>&infin;</sup> A<sub>n</sub> is an event
+</li>
+<li>For every event A, the complement A<sup>c</sup> is an event
+</li>
+</ol>
+
+<p>
+From 1. and 3., we can see &empty; is also an event since &Omega;<sup>c</sup> = &empty;.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Probability</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Given any sample space &Omega; and any class of events &Epsilon;, a probability rule is a function Pr{&sdot;} mapping each A &isin; &Epsilon; to a real number in such the following holds:
+</p>
+
+<ol class="org-ol">
+<li>Pr{&Omega;} = 1
+</li>
+<li>For every event A, Pr{A} &ge; 0
+</li>
+<li>The probability of the union of any sequence A<sub>1</sub>, A<sub>2</sub>,&#x2026; of disjoint events is given by
+</li>
+</ol>
+<p>
+Pr{&cup;<sub>n=1</sub><sup>&infin;</sup> A<sub>n</sub>} = &sum;<sub>n=1</sub><sup>&infin;</sup> Pr{A<sub>n</sub>}
+</p>
+
+<p>
+These can imply the followings:
+</p>
+
+<ul class="org-ul">
+<li>Pr{&empty;} = 0
+</li>
+<li>Pr{&cup;<sub>n=1</sub><sup>m</sup> A<sub>n</sub>} = &sum;<sub>n=1</sub><sup>m</sup> Pr{A<sub>n</sub>} for A<sub>1</sub>,&#x2026;,A<sub>m</sub> disjoint
+</li>
+<li>Pr{A<sup>c</sup>} = 1 - Pr{A} for all A
+</li>
+<li>Pr{A} &le; Pr{B} for all A &sube; B
+</li>
+<li>Pr{A} &le; 1 for all A
+</li>
+<li>&sum;<sub>n</sub> Pr{A<sub>n</sub>} &le; 1 for A<sub>1</sub>,..,A<sub>n</sub> disjoint
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Probability theories</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Conditional probabilities</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+For any two events A and B in a probability model, the conditional probability of A, conditional on B is defined if Pr{B} &gt; 0 by
+</p>
+
+<p>
+Pr{A|B} = Pr{AB}/Pr{B}
+</p>
+
+<p>
+Bayes' law can be written in the form
+</p>
+
+<p>
+Pr{A|B}Pr{B} = Pr{B|A}Pr{A}
+</p>
+
+<p>
+which directly derived from the conditional definition.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Statistical independent</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Two events, A and B, are statistically independent if
+</p>
+
+<p>
+Pr{AB} = Pr{A}Pr{B}
+</p>
+
+<p>
+For Pr{B} &gt; 0, this is equivalent to Pr{AB} = Pr{A}.
+</p>
+</div>
+
+<div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> conditionally independent</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Given C if Pr{AB|C} = Pr{A|C}Pr{B|C}
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> Multiple event indepedence</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+The events A<sub>1</sub>,&#x2026;,A<sub>n</sub>, n &gt; 2 are statistically independent if for each <i>collection of S for two or more of the integers 1 to n</i>.
+</p>
+
+<p>
+\[
+Pr\left\{\bigcap_{i\in S}A_{i }\right\} = \prod_{i\in S}Pr\left\{ A_i \right\}
+\]
+</p>
+
+<p>
+Note S is a power set of A<sub>1</sub>,&#x2026;,A<sub>n</sub> excluding &empty; and individuals.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Random variables</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+A random variable rv is a function X from the sample space &Omega; to the set of real numbers &real;. Three modifications are made.
+</p>
+
+<ol class="org-ol">
+<li>X might be undefined or infinite for a subset of &Omega; that has 0 probability.
+</li>
+<li>The mapping X(&omega;) must have the property that {&omega; &isin; &Omega; : X(&omega;) &le; x} is an event.
+</li>
+<li>Every finite set of rv s X<sub>1</sub>,&#x2026;,X<sub>n</sub> has the property that for each x<sub>1</sub> &isin; &real;,&#x2026;,x<sub>n</sub> &isin; &real;, the set {&omega;:X<sub>1</sub>(&omega;) &le; x<sub>1</sub>,&#x2026;,X<sub>n</sub>(&omega;) &le; x<sub>n</sub>} is an event.
+</li>
+</ol>
+
+<p>
+We need 2 and 3 else the cumulative distribution function may not exists.
+</p>
+
+<p>
+A random variable can be thought as a way to pick events from &Omega;. Even if there are infinite events we just need the cumulative form {&omega; &isin; &Omega; : X(&omega;) &le; x}, and the volume relative to &Omega; can be extracted by Pr{&sdot;} function.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Cumulative distribution function (CDF)</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+The cumulative distribution function of a rv X is a function F<sub>X</sub>(x) mapping each x &isin; &real; into 
+F<sub>X</sub>(x) = Pr{&omega; &isin; &Omega; : X(&omega;) &le; x}. We often omit &omega; and write F<sub>X</sub>(x) = Pr{X &le; x}.
+</p>
+
+<p>
+\[
+\lim_{x \to -\infty}F_X(x) = 0
+\]
+</p>
+
+<p>
+\[
+\lim_{x \to \infty }F_X(x) = 1
+\]
+</p>
+</div>
+
+
+<div id="outline-container-sec-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> Probability mass function (PMF)</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+If X has only a finite or countable number value x<sub>i</sub>, the probability Pr{X = x<sub>i</sub>} of each sample x<sub>i</sub> is called the probability mass function, denoted by p<sub>X</sub>(x<sub>i</sub>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> Probability density function (PDF)</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<p>
+If the CDF F<sub>X</sub>(x) of a rv X has a finite derivative at x, the derivative is called the density, or more precisely the probability density function of X at x is denoted by f<sub>X</sub>(x); for &delta; &gt; 0 sufficiently small, f<sub>X</sub>(x)&delta; then approximates the probability that X is mapped to a value between x and x + &delta;.
+</p>
+
+<p>
+A rv is said to be continuous if there is a funciton f<sub>X</sub>(x) such that, for each x &isin; &real;, the CDF satisfies 
+</p>
+
+<p>
+\[
+F_X(x) = \int_{-\infty}^x f_X(y)dy
+\]
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Common distributions</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Binomial distribution</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="binomial"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">binom</span>(p,o):
+  <span style="color: #a0522d;">o</span>[1] = n*p*(1-p)**(n-1)
+  <span style="color: #a020f0;">for</span> k <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(2,n+1):
+    <span style="color: #a0522d;">o</span>[k] = o[k-1] * (n+1-k) / k * p / (1-p)
+<span style="color: #a0522d;">p1</span>, <span style="color: #a0522d;">p3</span>, <span style="color: #a0522d;">p5</span>, <span style="color: #a0522d;">p7</span>, <span style="color: #a0522d;">p9</span> = 0.1, 0.3, 0.5, 0.7, 0.9
+<span style="color: #a0522d;">o1</span> = [0.0]*(n+1)
+<span style="color: #a0522d;">o3</span> = [0.0]*(n+1)
+<span style="color: #a0522d;">o5</span> = [0.0]*(n+1)
+<span style="color: #a0522d;">o7</span> = [0.0]*(n+1)
+<span style="color: #a0522d;">o9</span> = [0.0]*(n+1)
+binom(p1,o1)
+binom(p3,o3)
+binom(p5,o5)
+binom(p7,o7)
+binom(p9,o9)
+
+<span style="color: #a020f0;">return</span> <span style="color: #483d8b;">zip</span>(o1,o3,o5,o7,o9)
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-gnuplot">p data u 1 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.1"</span>, \
+  data u 2 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.3"</span>, \
+  data u 3 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.5"</span>, \
+  data u 4 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.7"</span>, \
+  data u 5 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.9"</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/prob-001.png" alt="prob-001.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Kullback-Liebler divergence</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+\[
+D_{KL}(P||Q) = \sum_{i}P(i)log \frac{P(i)}{Q(i)}
+\]
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="kl-divergence"><span style="color: #a020f0;">from</span> math <span style="color: #a020f0;">import</span> log
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">DKL</span>(p,n,k):
+  <span style="color: #a0522d;">p_t</span> = <span style="color: #483d8b;">float</span>(k)/<span style="color: #483d8b;">float</span>(n)
+  <span style="color: #a020f0;">return</span> p_t*log(p_t/p) + (1-p_t)*log((1-p_t)/(1-p))
+<span style="color: #483d8b;">xrange</span> = <span style="color: #483d8b;">range</span>(1,n)
+<span style="color: #a020f0;">return</span> <span style="color: #483d8b;">zip</span>(<span style="color: #483d8b;">xrange</span>, 
+  <span style="color: #483d8b;">map</span>(<span style="color: #a020f0;">lambda</span> k: DKL(0.1,n,k), <span style="color: #483d8b;">xrange</span>),
+  <span style="color: #483d8b;">map</span>(<span style="color: #a020f0;">lambda</span> k: DKL(0.3,n,k), <span style="color: #483d8b;">xrange</span>),
+  <span style="color: #483d8b;">map</span>(<span style="color: #a020f0;">lambda</span> k: DKL(0.5,n,k), <span style="color: #483d8b;">xrange</span>),
+  <span style="color: #483d8b;">map</span>(<span style="color: #a020f0;">lambda</span> k: DKL(0.7,n,k), <span style="color: #483d8b;">xrange</span>),
+  <span style="color: #483d8b;">map</span>(<span style="color: #a020f0;">lambda</span> k: DKL(0.9,n,k), <span style="color: #483d8b;">xrange</span>)
+)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-gnuplot">p data u 1:2 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.1"</span>, \
+  data u 1:3 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.3"</span>, \
+  data u 1:4 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.5"</span>, \
+  data u 1:5 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.7"</span>, \
+  data u 1:6 w <span style="color: #0000ff;">histeps</span> tit <span style="color: #8b2252;">"p=0.9"</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/prob-002.png" alt="prob-002.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Moment generating function</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+\[
+M(t) = g_X(t) = E\left[e^{tX}\right] = \int_{-\infty}^\infty e^{tX}dF_X(x)
+\]
+</p>
+
+<p>
+The k<sub>th</sub> derivative of g<sub>X</sub>(0) is the k<sub>th</sub> moment of X: E[X<sup>k</sup>].
+</p>
+
+<p>
+The logrithm of the MGF, called cumulant gnerating function is also useful.
+</p>
+
+<p>
+\[
+R(t) = \log\left[M(t)\right]
+\]
+</p>
+
+<p>
+\[
+R'(t) = \frac{M'(t)}{M(t)}
+\]
+</p>
+
+<p>
+\[
+R''(t) = \frac{M(t)M''(t) - [M'(t)]^2}{[M(t)]^2}
+\]
+</p>
+
+<p>
+And since M(0) = 1
+</p>
+
+<p>
+\[
+\mu = M'(0) = R'(0)
+\]
+</p>
+
+<p>
+and
+</p>
+
+<p>
+\[
+\sigma^2 = M''(0) - [M'(0)]^2 = R''(0)
+\]
+</p>
+</div>
+
+<div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Binary MGF</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<div class="org-src-container">
+
+<pre class="src src-gnuplot"><span style="color: #008b8b;">set</span> <span style="color: #228b22;">title</span> <span style="color: #8b2252;">"Binary MGF 1-p+pe^r"</span>
+p [<span style="color: #008b8b;">-0.1:0.1</span>] <span style="color: #a0522d;">f(x)=</span>(1-p+p*<span style="color: #0000ff;">exp</span>(x)), \
+  <span style="color: #a0522d;">p=</span>0.1, f(x) tit <span style="color: #8b2252;">"p=0.1"</span>, \
+  <span style="color: #a0522d;">p=</span>0.3, f(x) tit <span style="color: #8b2252;">"p=0.3"</span>, \
+  <span style="color: #a0522d;">p=</span>0.5, f(x) tit <span style="color: #8b2252;">"p=0.5"</span>, \
+  <span style="color: #a0522d;">p=</span>0.7, f(x) tit <span style="color: #8b2252;">"p=0.7"</span>, \
+  <span style="color: #a0522d;">p=</span>0.9, f(x) tit <span style="color: #8b2252;">"p=0.9"</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/prob-003.png" alt="prob-003.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> Binomial MGF</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<div class="org-src-container">
+
+<pre class="src src-gnuplot"><span style="color: #008b8b;">set</span> <span style="color: #228b22;">title</span> <span style="color: #8b2252;">"Binomial MGF (1-p+pe^r)^n, n=20"</span>
+p [<span style="color: #008b8b;">-0.1:0.1</span>] <span style="color: #a0522d;">f(x)=</span>(1-p+p*<span style="color: #0000ff;">exp</span>(x))**20, \
+  <span style="color: #a0522d;">p=</span>0.1, f(x) tit <span style="color: #8b2252;">"p=0.1"</span>, \
+  <span style="color: #a0522d;">p=</span>0.3, f(x) tit <span style="color: #8b2252;">"p=0.3"</span>, \
+  <span style="color: #a0522d;">p=</span>0.5, f(x) tit <span style="color: #8b2252;">"p=0.5"</span>, \
+  <span style="color: #a0522d;">p=</span>0.7, f(x) tit <span style="color: #8b2252;">"p=0.7"</span>, \
+  <span style="color: #a0522d;">p=</span>0.9, f(x) tit <span style="color: #8b2252;">"p=0.9"</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/prob-004.png" alt="prob-004.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Chernoff bound</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+\[
+Pr\{S_n \ge na\} \le \left[g_X(r)\right]^n e^{-rna}
+\]
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-gnuplot"><span style="color: #008b8b;">set</span> <span style="color: #228b22;">title</span> <span style="color: #8b2252;">"Binomial MGF (1-p+pe^r)^n * exp(-x*na), n=20"</span>
+p [<span style="color: #008b8b;">-0.3:1.1</span>] <span style="color: #a0522d;">f(x)=</span>((1-p+p*<span style="color: #0000ff;">exp</span>(x))**20)*<span style="color: #0000ff;">exp</span>(-x*a), \
+  <span style="color: #a0522d;">p=</span>0.5, <span style="color: #a0522d;">a=</span>10, f(x) tit <span style="color: #8b2252;">"p=0.5, na=10"</span>, \
+  <span style="color: #a0522d;">p=</span>0.5, <span style="color: #a0522d;">a=</span>13, f(x) tit <span style="color: #8b2252;">"p=0.5, na=13"</span>, \
+  <span style="color: #a0522d;">p=</span>0.5, <span style="color: #a0522d;">a=</span>15, f(x) tit <span style="color: #8b2252;">"p=0.5, na=15"</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/prob-005.png" alt="prob-005.png" />
+</p>
+</div>
+
+<p>
+The smallest value of na=10 is close to 1, while smallest value of na=15 is close to zero. These are the bounds for n=20, Pr{S<sub>n</sub> &ge; na}.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Felix Chern</p>
+<p class="date">Created: 2016-07-18 Mon 18:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.95.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
