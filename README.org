@@ -1,3 +1,5 @@
+#+TITLE: About
+
 * Math Learning Notes in Orgmode
 
 A simple repository to place my math study notes.

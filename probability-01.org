@@ -2,8 +2,6 @@
 #+AUTHOR: Felix Chern
 #+DESCRIPTION: Introduction to some elementary probability concepts
 
-#+TOC: headlines 2
-
 * Probability model core concepts
 
 A probability model can split into three compoents:
@@ -71,7 +69,9 @@ Given C if Pr{AB|C} = Pr{A|C}Pr{B|C}
 *** Multiple event indepedence
 The events A_1,...,A_n, n > 2 are statistically independent if for each /collection of S for two or more of the integers 1 to n/.
 
-Pr{\cap_{i\in S}A_i} = \prod_{i\in S}Pr{A_i}
+\[
+Pr\left\{\bigcap_{i\in S}A_{i }\right\} = \prod_{i\in S}Pr\left\{ A_i \right\}
+\]
 
 Note S is a power set of A_1,...,A_n excluding \empty and individuals.
 
@@ -92,8 +92,14 @@ A random variable can be thought as a way to pick events from \Omega. Even if th
 The cumulative distribution function of a rv X is a function F_X(x) mapping each x \in \real into 
 F_X(x) = Pr{\omega \in \Omega : X(\omega) \le x}. We often omit \omega and write F_X(x) = Pr{X \le x}.
 
-- \lim_{x \to -\infty}F_X(x) = 0
-- \lim_{x \to \infty }F_X(x) = 1
+\[
+\lim_{x \to -\infty}F_X(x) = 0
+\]
+
+\[
+\lim_{x \to \infty }F_X(x) = 1
+\]
+
 
 *** Probability mass function (PMF)
 
@@ -103,41 +109,165 @@ If X has only a finite or countable number value x_i, the probability Pr{X = x_i
 
 If the CDF F_X(x) of a rv X has a finite derivative at x, the derivative is called the density, or more precisely the probability density function of X at x is denoted by f_X(x); for \delta > 0 sufficiently small, f_X(x)\delta then approximates the probability that X is mapped to a value between x and x + \delta.
 
-A rv is said to be continuous if there is a funciton f_X(x) such that, for each x \in \real, the CDF satisfies F_X(x) = \int_{-\infty}^x f_X(y)dy
+A rv is said to be continuous if there is a funciton f_X(x) such that, for each x \in \real, the CDF satisfies 
+
+\[
+F_X(x) = \int_{-\infty}^x f_X(y)dy
+\]
+
 
 * Common distributions
 
 ** Binomial distribution
 
 #+name: binomial
-#+header: :var n=40 p=0.7
+#+header: :var n=40
 #+BEGIN_SRC python :results value :export none
 def binom(p,o):
   o[1] = n*p*(1-p)**(n-1)
   for k in range(2,n+1):
     o[k] = o[k-1] * (n+1-k) / k * p / (1-p)
-p1, p4, p5, p7 = 0.1, 0.4, 0.5, 0.7
+p1, p3, p5, p7, p9 = 0.1, 0.3, 0.5, 0.7, 0.9
 o1 = [0.0]*(n+1)
-o4 = [0.0]*(n+1)
+o3 = [0.0]*(n+1)
 o5 = [0.0]*(n+1)
 o7 = [0.0]*(n+1)
+o9 = [0.0]*(n+1)
 binom(p1,o1)
-binom(p4,o4)
+binom(p3,o3)
 binom(p5,o5)
 binom(p7,o7)
+binom(p9,o9)
 
-return zip(o1,o4,o5,o7)
+return zip(o1,o3,o5,o7,o9)
 #+END_SRC
 
 
 #+BEGIN_SRC gnuplot :var data=binomial :file img/prob-001.png :exports both :term png small size 480,320
 p data u 1 w histeps tit "p=0.1", \
-  data u 2 w histeps tit "p=0.4", \
+  data u 2 w histeps tit "p=0.3", \
   data u 3 w histeps tit "p=0.5", \
-  data u 4 w histeps tit "p=0.7"
+  data u 4 w histeps tit "p=0.7", \
+  data u 5 w histeps tit "p=0.9"
 #+END_SRC
 
 #+RESULTS:
 [[file:img/prob-001.png]]
 
 
+** Kullback-Liebler divergence
+
+\[
+D_{KL}(P||Q) = \sum_{i}P(i)log \frac{P(i)}{Q(i)}
+\]
+
+#+NAME: kl-divergence
+#+HEADER: :var n=20
+#+BEGIN_SRC python
+from math import log
+def DKL(p,n,k):
+  p_t = float(k)/float(n)
+  return p_t*log(p_t/p) + (1-p_t)*log((1-p_t)/(1-p))
+xrange = range(1,n)
+return zip(xrange, 
+  map(lambda k: DKL(0.1,n,k), xrange),
+  map(lambda k: DKL(0.3,n,k), xrange),
+  map(lambda k: DKL(0.5,n,k), xrange),
+  map(lambda k: DKL(0.7,n,k), xrange),
+  map(lambda k: DKL(0.9,n,k), xrange)
+)
+#+END_SRC
+
+#+BEGIN_SRC gnuplot :var data=kl-divergence :file img/prob-002.png :exports both :term png small size 480,320
+p data u 1:2 w histeps tit "p=0.1", \
+  data u 1:3 w histeps tit "p=0.3", \
+  data u 1:4 w histeps tit "p=0.5", \
+  data u 1:5 w histeps tit "p=0.7", \
+  data u 1:6 w histeps tit "p=0.9"
+#+END_SRC
+
+#+RESULTS:
+[[file:img/prob-002.png]]
+
+** Moment generating function
+
+\[
+M(t) = g_X(t) = E\left[e^{tX}\right] = \int_{-\infty}^\infty e^{tX}dF_X(x)
+\]
+
+The k_{th} derivative of g_X(0) is the k_{th} moment of X: E[X^{k}].
+
+The logrithm of the MGF, called cumulant gnerating function is also useful.
+
+\[
+R(t) = \log\left[M(t)\right]
+\]
+
+\[
+R'(t) = \frac{M'(t)}{M(t)}
+\]
+
+\[
+R''(t) = \frac{M(t)M''(t) - [M'(t)]^2}{[M(t)]^2}
+\]
+
+And since M(0) = 1
+
+\[
+\mu = M'(0) = R'(0)
+\]
+
+and
+
+\[
+\sigma^2 = M''(0) - [M'(0)]^2 = R''(0)
+\]
+
+*** Binary MGF
+
+#+BEGIN_SRC gnuplot :file img/prob-003.png :exports both :term png small size 480,320
+set title "Binary MGF 1-p+pe^r"
+p [-0.1:0.1] f(x)=(1-p+p*exp(x)), \
+  p=0.1, f(x) tit "p=0.1", \
+  p=0.3, f(x) tit "p=0.3", \
+  p=0.5, f(x) tit "p=0.5", \
+  p=0.7, f(x) tit "p=0.7", \
+  p=0.9, f(x) tit "p=0.9"
+#+END_SRC
+
+#+RESULTS:
+[[file:img/prob-003.png]]
+
+*** Binomial MGF
+
+#+BEGIN_SRC gnuplot :file img/prob-004.png :exports both :term png small size 480,320
+set title "Binomial MGF (1-p+pe^r)^n, n=20"
+p [-0.1:0.1] f(x)=(1-p+p*exp(x))**20, \
+  p=0.1, f(x) tit "p=0.1", \
+  p=0.3, f(x) tit "p=0.3", \
+  p=0.5, f(x) tit "p=0.5", \
+  p=0.7, f(x) tit "p=0.7", \
+  p=0.9, f(x) tit "p=0.9"
+#+END_SRC
+
+#+RESULTS:
+[[file:img/prob-004.png]]
+
+** Chernoff bound
+
+\[
+Pr\{S_n \ge na\} \le \left[g_X(r)\right]^n e^{-rna}
+\]
+
+#+BEGIN_SRC gnuplot :file img/prob-005.png :exports both :term png small size 480,320
+set title "Binomial MGF (1-p+pe^r)^n * exp(-x*na), n=20"
+p [-0.3:1.1] f(x)=((1-p+p*exp(x))**20)*exp(-x*a), \
+  p=0.5, a=10, f(x) tit "p=0.5, na=10", \
+  p=0.5, a=13, f(x) tit "p=0.5, na=13", \
+  p=0.5, a=15, f(x) tit "p=0.5, na=15"
+#+END_SRC
+
+#+RESULTS:
+[[file:img/prob-005.png]]
+
+The smallest value of na=10 is close to 1, while smallest value of na=15 is close to zero. These are the bounds for n=20, Pr{S_n \ge na}.
