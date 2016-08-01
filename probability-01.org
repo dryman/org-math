@@ -61,7 +61,7 @@ Two events, A and B, are statistically independent if
 
 Pr{AB} = Pr{A}Pr{B}
 
-For Pr{B} > 0, this is equivalent to Pr{AB} = Pr{A}.
+For Pr{B} > 0, this is equivalent to Pr{A|B} = Pr{A}.
 
 *** conditionally independent
 Given C if Pr{AB|C} = Pr{A|C}Pr{B|C}
